@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horloge Haute Précision</title>
+    <style>
+        /* Un petit look moderne et sombre */
+        body {
+            background-color: #121212;
+            color: #00ff88;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .clock-container {
+            text-align: center;
+            border: 2px solid #00ff88;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        #clock {
+            font-size: 5rem;
+            font-weight: bold;
+        }
+
+        .ms {
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock-container">
+        <div id="clock">
+            <span id="time">00:00:00</span><span class="ms">.<span id="milliseconds">000</span></span>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Extraction des composants du temps
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+            // Mise à jour du HTML
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('milliseconds').textContent = milliseconds;
+
+            // Rappel de la fonction au prochain rafraîchissement de l'écran (ultra fluide)
+            requestAnimationFrame(updateClock);
+        }
+
+        // Lancement initial
+        updateClock();
+    </script>
+</body>
+</html>
